@@ -29,7 +29,6 @@ C1 --> D[Estatísticas por Estação<br/>Min, Média, Max]
 C2 --> D
 C3 --> D
 C4 --> D
-C5 --> D
 
 style A fill:#e1f5ff
 style C5 fill:#c8e6c9
