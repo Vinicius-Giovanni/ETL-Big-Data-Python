@@ -62,8 +62,8 @@ style D fill:#fff3e0
 
 ### ELT (Extract, Load, Transform)
 
-**ELT** é a nova estratégia de tratamento de dados, o fluxo dela é basicamente:
-***Extract***: Extração da informação
+**ELT** é a nova estratégia de tratamento de dados, o fluxo dela é :
+***Extract***: Extração dos dados
 ***Load***: Duplicação das informações (banco de dados) da etapa de **Extração**
 ***Transform***: Tratamento dos dados
 
@@ -76,4 +76,19 @@ onde você geralmente aplica essa estratégia de ***ELT*** nele, carregando o se
 Apesar do alto custo de **storage**, devido a duplicação do banco de dados, é um método eficiente já que em casos de problemas, erros e informações erradas, você falcilmente consegue indetificar essa questão sabendo se é um problema no dataset ou no framework(dbt).
 Esse método era inviavel antigamente, devido ao alto custo de store, 1GB chegava a custar milhões de dolares
 
-### ETL
+### ETL (Extract, Load, Transform)
+
+**ETL** é uma estratégia de tratamento de dados já antiga e ainda utilizada, o fluxo dela é:
+***Extract***: Extração dos dados
+***Transform***: Transformação das informações, depois do carregamento dos dados na etapa **Extract**
+***Load***: Disponibilização dos dados para consulmo
+
+-----
+
+#### Considerações
+Esse modo de tratamento de dados é amplamente usado, pela eficiencia. Porém em questão a problema de visualização de dados era um pouco mais complicada, devido a não ser se os problemas proviam do dataset ou do framework utilizado para visualizar os dados, foi ai que veio a estratégia **ELT** mais pesada, porém mais fácil de governar. 
+
+---
+## Considerações
+
+O arquivo **weather_stations_sample.csv**, tem a lista de cidades em que os dados serão gerados pelo script **create_measurements.py**

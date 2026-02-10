@@ -1,3 +1,6 @@
 .venv
 .env
 __pycache__
+
+# Arquivo com as 1 bilhão de linhas
+weather_stations.csv
