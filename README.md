@@ -72,7 +72,7 @@ onde você geralmente aplica essa estratégia de ***ELT*** nele, carregando o se
 
 -----
 
-#### Considerações
+### Considerações
 Apesar do alto custo de **storage**, devido a duplicação do banco de dados, é um método eficiente já que em casos de problemas, erros e informações erradas, você falcilmente consegue indetificar essa questão sabendo se é um problema no dataset ou no framework(dbt).
 Esse método era inviavel antigamente, devido ao alto custo de store, 1GB chegava a custar milhões de dolares
 
@@ -85,10 +85,37 @@ Esse método era inviavel antigamente, devido ao alto custo de store, 1GB chegav
 
 -----
 
-#### Considerações
+### Considerações
 Esse modo de tratamento de dados é amplamente usado, pela eficiencia. Porém em questão a problema de visualização de dados era um pouco mais complicada, devido a não ser se os problemas proviam do dataset ou do framework utilizado para visualizar os dados, foi ai que veio a estratégia **ELT** mais pesada, porém mais fácil de governar. 
 
 ---
-## Considerações
+### Considerações
 
 O arquivo **weather_stations_sample.csv**, tem a lista de cidades em que os dados serão gerados pelo script **create_measurements.py**
+
+---
+
+### Load Less Data (Carregar Menos Dados)
+Carregue menos dados, dados desnecessário, colunas, linhas e informações que não serão utilizadas
+
+### Use Efficient Datatypes (Uso Eficiente de Tipo de Dados)
+
+- Tipo ***category***:
+    No SQL, quando temos uma coluna de cidade por exemplo, fazemos sempre uma nova tabela dimensão_cidade, oque é isso?
+    Imagina que, na tabela principal os nomes das tabelas se repetem diversas vezes e toda vez que ela se repete, ela ocupa mais espaço na memória.
+    Portanto, é extremamente útil criar uma dim_cidade, onde trocamos os valores em string da cidade, para nº int unitário. Assim, os valores das cidades que antes ocupavam mais memória,
+    agora ocupam apenas um caracterer da memória.
+
+    O tipo 'category' faz exatamente isso, ele categoriza os tipos de informações
+
+**Exemplo de uso:**
+
+df['name_column'] = df['name_column'].astype('category')
+
+- Tipo ***float32***:
+    O python, por padrão usa o float64 que armazena 15-17 dígitos portanto ocupa mais memória.
+    É recomendado usar o float32, que armazena menos dígitos. Esse tipo é utilizando quando a velocidade é mais importante que a precisão
+
+**Exempo de uso:**
+
+df['name_column'] = df['name_column'].astype('float32')
