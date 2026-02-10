@@ -55,3 +55,25 @@ style D fill:#fff3e0
 ├── pyproject.toml                # Dependências do projeto
 └── README.md                     # Este arquivo
 ```
+
+-----
+
+## Técnicas Apresentadas
+
+### ELT (Extract, Load, Transform)
+
+**ELT** é a nova estratégia de tratamento de dados, o fluxo dela é basicamente:
+***Extract***: Extração da informação
+***Load***: Duplicação das informações (banco de dados) da etapa de **Extração**
+***Transform***: Tratamento dos dados
+
+Uma das ferraments mais utilizadas para transformação de dados em SQL, hoje em dia é o ***dbt-core***,
+onde você geralmente aplica essa estratégia de ***ELT*** nele, carregando o seu banco de dados e aplicando seu tratamento através do ***dbt***
+
+-----
+
+#### Considerações
+Apesar do alto custo de **storage**, devido a duplicação do banco de dados, é um método eficiente já que em casos de problemas, erros e informações erradas, você falcilmente consegue indetificar essa questão sabendo se é um problema no dataset ou no framework(dbt).
+Esse método era inviavel antigamente, devido ao alto custo de store, 1GB chegava a custar milhões de dolares
+
+### ETL
