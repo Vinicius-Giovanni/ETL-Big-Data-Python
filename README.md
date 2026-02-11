@@ -79,6 +79,7 @@ O arquivo **weather_stations_sample.csv**, tem a lista de cidades em que os dado
 ---
 
 ### Load Less Data (Carregar Menos Dados)
+
 Carregue menos dados, dados desnecessário, colunas, linhas e informações que não serão utilizadas
 
 ### Use Efficient Datatypes (Uso Eficiente de Tipo de Dados)
@@ -104,11 +105,13 @@ df['name_column'] = df['name_column'].astype('category')
 df['name_column'] = df['name_column'].astype('float32')
 
 ### Chunksize
-    Chunksize é uma estratégia onde, dividimos um dataset gigante em outros menores, para que a memória não seja estourada ela apenas aplicara as transformações, leitura e etc em um "pedaço" de 
-    cada vez do dataset gigante.
-    Existem prós e contras dessa estratégia, o contra é que demora mais para que o processa inteiro seja finalizado, porém o pró é que o seu processa rodará sem que você se preocupe com a memória da sua máquina.
+
+Chunksize é uma estratégia onde, dividimos um dataset gigante em outros menores, para que a memória não seja estourada ela apenas aplicara as transformações, leitura e etc em um "pedaço" de 
+cada vez do dataset gigante.
+Existem prós e contras dessa estratégia, o contra é que demora mais para que o processa inteiro seja finalizado, porém o pró é que o seu processa rodará sem que você se preocupe com a memória da sua máquina.
 
 **Observações**
+
 DuckDB e Spark já possuem uma estrutura semelhante a ideia de 'chunksize' com os seus dados, sem você declarar isso no seu código. Portanto essa estratégia não precisa ser implementada em ambos, porém, ambos possuem estratégias diferentes:
 
 - DuckDB: Trabalha com **Multiprocessamento**, ou seja, divide seu dataset em datasets menores, e cada dataset terá o seu core especifico rodando ele.
