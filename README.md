@@ -121,6 +121,13 @@ df['name_column'] = df['name_column'].astype('category')
 df['name_column'] = df['name_column'].astype('float32')
 
 ### Chunksize
-    Chunksize é uma estratégia onde, dividimos um dataset gigante em outros menores, para que a memória não sera estourada ela apenas aplicara as transformações, leitura e etc em um "pedaço" de 
+    Chunksize é uma estratégia onde, dividimos um dataset gigante em outros menores, para que a memória não seja estourada ela apenas aplicara as transformações, leitura e etc em um "pedaço" de 
     cada vez do dataset gigante.
     Existem prós e contras dessa estratégia, o contra é que demora mais para que o processa inteiro seja finalizado, porém o pró é que o seu processa rodará sem que você se preocupe com a memória da sua máquina.
+
+**Observações**
+DuckDB e Spark já possuem uma estrutura semelhante a ideia de 'chunksize' com os seus dados, sem você declarar isso no seu código. Portanto essa estratégia não precisa ser implementada em ambos, porém, ambos possuem estratégias diferentes:
+
+- DuckDB: Trabalha com **Multiprocessamento**, ou seja, divide seu dataset em datasets menores, e cada dataset terá o seu core especifico rodando ele.
+
+- Spark: Trabalha **Processamento Distribuído**, ou seja, divide seu dataset em datasets menores, e cada dataset terá o seu core e máquina rodando ele. Um **Processamento Distribuído** é quando há várias máquinas realizando **multiprocessamentos**
