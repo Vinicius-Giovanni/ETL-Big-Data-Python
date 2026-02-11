@@ -72,7 +72,7 @@ onde você geralmente aplica essa estratégia de ***ELT*** nele, carregando o se
 
 -----
 
-### Considerações
+**Considerações**
 Apesar do alto custo de **storage**, devido a duplicação do banco de dados, é um método eficiente já que em casos de problemas, erros e informações erradas, você falcilmente consegue indetificar essa questão sabendo se é um problema no dataset ou no framework(dbt).
 Esse método era inviavel antigamente, devido ao alto custo de store, 1GB chegava a custar milhões de dolares
 
@@ -85,11 +85,11 @@ Esse método era inviavel antigamente, devido ao alto custo de store, 1GB chegav
 
 -----
 
-### Considerações
+**Considerações**
 Esse modo de tratamento de dados é amplamente usado, pela eficiencia. Porém em questão a problema de visualização de dados era um pouco mais complicada, devido a não ser se os problemas proviam do dataset ou do framework utilizado para visualizar os dados, foi ai que veio a estratégia **ELT** mais pesada, porém mais fácil de governar. 
 
 ---
-### Considerações
+**Considerações**
 
 O arquivo **weather_stations_sample.csv**, tem a lista de cidades em que os dados serão gerados pelo script **create_measurements.py**
 
