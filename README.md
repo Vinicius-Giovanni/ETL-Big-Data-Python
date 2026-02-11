@@ -14,7 +14,7 @@ Este projeto demonstra como processar eficientemente **1 bilhão de linhas de da
 
 ## 📊 Fluxo do Projeto
 
-![Fluxo do Projeto](images\fluxo_projeto.png)
+![alt text](images\fluxo_projeto.png)
 
 -----
 
@@ -122,14 +122,14 @@ DuckDB e Spark já possuem uma estrutura semelhante a ideia de 'chunksize' com o
 ---
 
 #### Python Puro
-![Python Puro](images\py.png)
+![alt text](images\py.png)
 
 ---
 
 #### Pandas
-![Pandas](images\panda.png)
+![alt text](images\panda.png)
 
 ---
 
 #### Duckdb
-![Duckdb](images\duck.png)
+![alt text](images\duck.png)
