@@ -1,10 +1,10 @@
-# Processo de Python puro para 1kk linhas foi em 3.42 sec
+# Processo de Python puro para 100 milhões de linhas foi em 355.08 sec
 from csv import reader
 from collections import defaultdict, Counter
 from tqdm import tqdm  # barra de progresso
 import time
 
-NUMERO_DE_LINHAS = 1_000_000
+NUMERO_DE_LINHAS = 100_000_000
 
 def processar_temperaturas(path_do_csv):
     # utilizando infinito positivo e negativo para comparar
@@ -52,9 +52,7 @@ if __name__ == "__main__":
 
     end_time = time.time()  # Tempo de término
 
-    for station, metrics in resultados.items():
-        print(station, metrics, sep=': ')
+    # for station, metrics in resultados.items():
+    #     print(station, metrics, sep=': ')
 
     print(f"\nProcessamento concluído em {end_time - start_time:.2f} segundos.")
-
-# Processamento para 1_000_000 de linhas concluído em 2.62 segundos 

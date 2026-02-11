@@ -1,12 +1,12 @@
-# Processo de Pandas para 1kk linhas foi em 3.39 sec
+# Processo de Pandas para 100 milhões de linhas foi em 64.51 sec
 import pandas as pd
 from multiprocessing import Pool, cpu_count # cpu_count conta a qt de cpus disponiveis
 from tqdm import tqdm # importa a barra de progresso
 
 CONCURRENCY = cpu_count()
 
-total_linhas = 1_000_000 # Total de linhas conhecido
-chunksize = 100_000 # Define o tamanho da chunk
+total_linhas = 100000000 # Total de linhas conhecido
+chunksize = 100000 # Define o tamanho da chunk
 filename = "data/measurements.txt"
 
 def process_chunk(chunk):

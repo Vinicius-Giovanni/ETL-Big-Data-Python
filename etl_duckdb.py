@@ -1,4 +1,4 @@
-# Processo de Duckdb para 1kk linhas foi em 0.34 sec
+# Processo de Duckdb para 100 milhões de linhas foi em 22.85 sec
 import duckdb
 
 def create_duckdb():
