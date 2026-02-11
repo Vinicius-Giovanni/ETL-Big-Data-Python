@@ -14,24 +14,7 @@ Este projeto demonstra como processar eficientemente **1 bilhão de linhas de da
 
 ## 📊 Fluxo do Projeto
 
-```mermaid
-graph TD
-A[Arquivo CSV<br/>1 Bilhão de linhas<br/>~14GB] --> B{Abordagem}
-
-B --> |Python Puro| C1[20 min]
-B --> |Pandas| C2[263 seg]
-B --> |Duckdb| C3[155 seg]
-B --> |PySpark| C4[14 seg]
-
-C1 --> D[Estatísticas por Estação<br/>Min, Média, Max]
-C2 --> D
-C3 --> D
-C4 --> D
-
-style A fill:#e1f5ff
-style C5 fill:#c8e6c9
-style D fill:#fff3e0
-```
+![Fluxo do Projeto](fluxo_projeto.png)
 
 -----
 
