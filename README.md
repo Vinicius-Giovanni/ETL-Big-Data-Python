@@ -8,10 +8,8 @@ Este projeto demonstra como processar eficientemente **1 bilhão de linhas de da
 [![Projeto](https://img.shields.io/badge/Projeto-Big%20Data-blue?style=for-the-badge)](https://suajornadadedados.com.br/)
 [![Python](https://img.shields.io/badge/Python-3.12+-green?style=for-the-badge\&logo=python)](https://python.org)
 [![Pandas](https://img.shields.io/badge/Pandas-Data%20Processing-blue?style=for-the-badge\&logo=pandas)](https://pandas.pydata.org/)
-[![Dask](https://img.shields.io/badge/Dask-Distributed-orange?style=for-the-badge)](https://dask.org/)
-[![Polars](https://img.shields.io/badge/Polars-Fast%20DataFrames-red?style=for-the-badge)](https://pola-rs.github.io/polars/)
 [![DuckDB](https://img.shields.io/badge/DuckDB-Analytics-yellow?style=for-the-badge)](https://duckdb.org/)
-
+[![Spark](https://img.shields.io/badge/Spark-Fast%20DataFrames-red?style=for-the-badge)](https://docs.databricks.com/aws/en/)
 -----
 
 ## 📊 Fluxo do Projeto
