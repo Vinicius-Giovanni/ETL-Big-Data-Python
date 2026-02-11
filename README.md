@@ -119,3 +119,8 @@ df['name_column'] = df['name_column'].astype('category')
 **Exempo de uso:**
 
 df['name_column'] = df['name_column'].astype('float32')
+
+### Chunksize
+    Chunksize é uma estratégia onde, dividimos um dataset gigante em outros menores, para que a memória não sera estourada ela apenas aplicara as transformações, leitura e etc em um "pedaço" de 
+    cada vez do dataset gigante.
+    Existem prós e contras dessa estratégia, o contra é que demora mais para que o processa inteiro seja finalizado, porém o pró é que o seu processa rodará sem que você se preocupe com a memória da sua máquina.
