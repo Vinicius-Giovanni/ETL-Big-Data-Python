@@ -14,7 +14,7 @@ Este projeto demonstra como processar eficientemente **1 bilhão de linhas de da
 
 ## 📊 Fluxo do Projeto
 
-![Fluxo do Projeto](fluxo_projeto.png)
+![Fluxo do Projeto](images\fluxo_projeto.png)
 
 -----
 
@@ -114,3 +114,22 @@ DuckDB e Spark já possuem uma estrutura semelhante a ideia de 'chunksize' com o
 - DuckDB: Trabalha com **Multiprocessamento**, ou seja, divide seu dataset em datasets menores, e cada dataset terá o seu core especifico rodando ele.
 
 - Spark: Trabalha **Processamento Distribuído**, ou seja, divide seu dataset em datasets menores, e cada dataset terá o seu core e máquina rodando ele. Um **Processamento Distribuído** é quando há várias máquinas realizando **multiprocessamentos**
+
+---
+
+# Resultados
+
+---
+
+#### Python Puro
+![Python Puro](images\py.png)
+
+---
+
+#### Pandas
+![Pandas](images\panda.png)
+
+---
+
+#### Duckdb
+![Duckdb](images\duck.png)
