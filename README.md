@@ -39,84 +39,127 @@ Este projeto demonstra como processar eficientemente **1 bilhão de linhas de da
 
 -----
 
-## Técnicas Apresentadas
+## ⚙️ Técnicas e Conceitos Aplicados
+### 🔄 ETL vs ELT
 
-### ELT (Extract, Load, Transform)
+**🔹 ETL (Extract, Transform, Load)**
 
-**ELT** é a nova estratégia de tratamento de dados, o fluxo dela é :
-***Extract***: Extração dos dados
-***Load***: Duplicação das informações (banco de dados) da etapa de **Extração**
-***Transform***: Tratamento dos dados
+Fluxo tradicional:
+1. Extract → Extração dos dados
 
-Uma das ferraments mais utilizadas para transformação de dados em SQL, hoje em dia é o ***dbt-core***,
-onde você geralmente aplica essa estratégia de ***ELT*** nele, carregando o seu banco de dados e aplicando seu tratamento através do ***dbt***
+2. Transform → Transformação antes de carregar
 
------
+3. Load → Disponibilização para consumo
 
-**Considerações**
+📌 Características:
 
-Apesar do alto custo de **storage**, devido a duplicação do banco de dados, é um método eficiente já que em casos de problemas, erros e informações erradas, você falcilmente consegue indetificar essa questão sabendo se é um problema no dataset ou no framework(dbt).
-Esse método era inviavel antigamente, devido ao alto custo de store, 1GB chegava a custar milhões de dolares
-
-### ETL (Extract, Load, Transform)
-
-**ETL** é uma estratégia de tratamento de dados já antiga e ainda utilizada, o fluxo dela é:
-***Extract***: Extração dos dados
-***Transform***: Transformação das informações, depois do carregamento dos dados na etapa **Extract**
-***Load***: Disponibilização dos dados para consulmo
+* Transformação ocorre fora do banco.
+* Menor custo de armazenamento.
+* Bastante utilizado em pipelines tradicionais.
+* Pode dificultar rastreabilidade quando há erro no dado transformado.
 
 -----
 
-**Considerações**
+**🔹 ELT (Extract, Load, Transform)**
 
-Esse modo de tratamento de dados é amplamente usado, pela eficiencia. Porém em questão a problema de visualização de dados era um pouco mais complicada, devido a não ser se os problemas proviam do dataset ou do framework utilizado para visualizar os dados, foi ai que veio a estratégia **ELT** mais pesada, porém mais fácil de governar. 
+Fluxo moderno:
+1. Extract → Extração dos dados
 
----
-**Considerações**
+2. Load → Carregamento no banco (dados brutos)
 
-O arquivo **weather_stations_sample.csv**, tem a lista de cidades em que os dados serão gerados pelo script **create_measurements.py**
+3. Transform → Transformação dentro do banco
 
----
+📌 Características:
 
-### Load Less Data (Carregar Menos Dados)
+* Dados brutos ficam armazenados.
+* Melhor governança e auditoria.
+* Mais fácil identificar se o problema está no dataset ou na transformação.
+* Maior custo de storage.
 
-Carregue menos dados, dados desnecessário, colunas, linhas e informações que não serão utilizadas
+Ferramenta comum nesse modelo: dbt-core (transformações via SQL dentro do banco).
 
-### Use Efficient Datatypes (Uso Eficiente de Tipo de Dados)
+📌 Observação histórica:
+Esse modelo se tornou viável com a redução do custo de armazenamento ao longo dos anos.
 
-- Tipo ***category***:
-    No SQL, quando temos uma coluna de cidade por exemplo, fazemos sempre uma nova tabela dimensão_cidade, oque é isso?
-    Imagina que, na tabela principal os nomes das tabelas se repetem diversas vezes e toda vez que ela se repete, ela ocupa mais espaço na memória.
-    Portanto, é extremamente útil criar uma dim_cidade, onde trocamos os valores em string da cidade, para nº int unitário. Assim, os valores das cidades que antes ocupavam mais memória,
-    agora ocupam apenas um caracterer da memória.
+-----
 
-    O tipo 'category' faz exatamente isso, ele categoriza os tipos de informações
+## 📂 Load Less Data
 
-**Exemplo de uso:**
+Carregar apenas o necessário é uma das maiores otimizações possíveis.
 
-df['name_column'] = df['name_column'].astype('category')
+* Evite colunas desnecessárias
+* Evite linhas irrelevantes
+* Reduza leitura de disco (I/O)
+* Reduza uso de memória
+* Menos dados = menos custo computacional
 
-- Tipo ***float32***:
-    O python, por padrão usa o float64 que armazena 15-17 dígitos portanto ocupa mais memória.
-    É recomendado usar o float32, que armazena menos dígitos. Esse tipo é utilizando quando a velocidade é mais importante que a precisão
+-----
 
-**Exempo de uso:**
+## 🧠 Uso Eficiente de Tipos de Dados
 
-df['name_column'] = df['name_column'].astype('float32')
+Escolher o tipo correto impacta diretamente memória e performance.
 
-### Chunksize
+🔹 category
 
-Chunksize é uma estratégia onde, dividimos um dataset gigante em outros menores, para que a memória não seja estourada ela apenas aplicara as transformações, leitura e etc em um "pedaço" de 
-cada vez do dataset gigante.
-Existem prós e contras dessa estratégia, o contra é que demora mais para que o processa inteiro seja finalizado, porém o pró é que o seu processa rodará sem que você se preocupe com a memória da sua máquina.
+Ideal para colunas com muitos valores repetidos (ex: cidade, estação).
+Equivalente ao conceito de tabela dimensão no modelo dimensional.
+Internamente, ele armazena um identificador numérico em vez da string repetida.
 
-**Observações**
+    df['coluna'] = df['coluna'].astype('category')
 
-DuckDB e Spark já possuem uma estrutura semelhante a ideia de 'chunksize' com os seus dados, sem você declarar isso no seu código. Portanto essa estratégia não precisa ser implementada em ambos, porém, ambos possuem estratégias diferentes:
+Benefício:
 
-- DuckDB: Trabalha com **Multiprocessamento**, ou seja, divide seu dataset em datasets menores, e cada dataset terá o seu core especifico rodando ele.
+* Redução significativa de memória
+* Operações de groupby mais rápidas
 
-- Spark: Trabalha **Processamento Distribuído**, ou seja, divide seu dataset em datasets menores, e cada dataset terá o seu core e máquina rodando ele. Um **Processamento Distribuído** é quando há várias máquinas realizando **multiprocessamentos**
+-----
+
+🔹 float32 vs float64
+
+Por padrão, Python usa float64 (maior precisão, maior consumo de memória).
+Se a precisão extrema não for necessária, float32 é mais leve e mais rápido.
+
+    df['coluna'] = df['coluna'].astype('float32')
+
+Trade-off:
+
+Menos precisão
+Melhor performance
+
+-----
+
+📦 Processamento em Chunks
+
+Dividir grandes volumes em partes menores evita estouro de memória.
+
+Em vez de carregar 14GB de uma vez, o processamento ocorre por blocos menores.
+
+Vantagens:
+
+Controle de memória
+
+Execução mais estável
+
+Desvantagem:
+
+Pode aumentar o tempo total de execução
+
+-----
+
+## 🚀 Como Cada Engine Lida com Escala
+
+Nem sempre é necessário implementar chunksize manualmente.
+
+**🦆 DuckDB**
+
+* Execução vetorizada
+* Multiprocessamento automático
+* Paralelismo interno por padrão
+Ele divide o trabalho entre múltiplos cores da máquina.
+
+-----
+
+
 
 ---
 
